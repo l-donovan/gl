@@ -6,10 +6,14 @@
 #include "lgll/scene.h"
 #include "lgll/shader.h"
 
-Entity suzanne("engine/models/suzanne.obj", "engine/shaders/base.v.glsl", "engine/shaders/base.f.glsl");
-Entity cactus("engine/models/succulent.obj", "engine/shaders/base.v.glsl", "engine/shaders/base.f.glsl");
-Entity skybox("engine/models/uv_sphere.obj", "engine/shaders/base.v.glsl", "engine/shaders/base.f.glsl");
-Entity sphere("engine/models/uv_sphere.obj", "engine/shaders/base.v.glsl", "engine/shaders/base.f.glsl");
+#include <string>
+
+std::string ROOT_DIR(_ROOT_DIR);
+
+Entity suzanne(ROOT_DIR + "/engine/models/suzanne.obj", ROOT_DIR + "/engine/shaders/base.v.glsl", ROOT_DIR + "/engine/shaders/base.f.glsl");
+Entity cactus(ROOT_DIR + "/engine/models/succulent.obj", ROOT_DIR + "/engine/shaders/base.v.glsl", ROOT_DIR + "/engine/shaders/base.f.glsl");
+Entity skybox(ROOT_DIR + "/engine/models/uv_sphere.obj", ROOT_DIR + "/engine/shaders/base.v.glsl", ROOT_DIR + "/engine/shaders/base.f.glsl");
+Entity sphere(ROOT_DIR + "/engine/models/uv_sphere.obj", ROOT_DIR + "/engine/shaders/base.v.glsl", ROOT_DIR + "/engine/shaders/base.f.glsl");
 
 struct attributes suzanne_mat = {
     .color = glm::vec3(0.6, 0.5, 0.6),
@@ -78,10 +82,10 @@ void window_size(int width, int height) {
 }
 
 int main(int argc, char** argv) {
-    suzanne.set_texture("engine/images/chinese_garden.png");
-    cactus.set_texture("engine/images/SPIKEY_SUCCULENT_5K_u1_v1.jpg");
-    skybox.set_texture("engine/images/chinese_garden.png");
-    sphere.set_texture("engine/images/chinese_garden.png");
+    suzanne.set_texture(ROOT_DIR + "/engine/images/chinese_garden.png");
+    cactus.set_texture(ROOT_DIR + "/engine/images/CubeTexture.png");
+    skybox.set_texture(ROOT_DIR + "/engine/images/chinese_garden.png");
+    sphere.set_texture(ROOT_DIR + "/engine/images/chinese_garden.png");
 
     suzanne.set_material_attributes(&suzanne_mat);
     cactus.set_material_attributes(&cactus_mat);

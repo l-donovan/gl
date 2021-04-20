@@ -14,7 +14,7 @@ using std::string;
 
 std::map<std::string, GLuint> shaders;
 
-char* file_read(const char* filename) {
+char* file_read(std::string filename) {
     std::ifstream file(filename, std::ios::binary | std::ios::ate);
     std::streamsize size = file.tellg();
     file.seekg(0, std::ios::beg);
@@ -60,7 +60,7 @@ void print_log(GLuint object) {
 /**
  * Compile the shader from file 'filename', with error handling
  */
-GLuint create_shader(const char* filename, GLenum type) {
+GLuint create_shader(std::string filename, GLenum type) {
     auto it = shaders.find(filename);
     if (it != shaders.end()) {
         std::cout << "Loaded existing shader " << filename << std::endl;

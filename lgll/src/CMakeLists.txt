@@ -13,14 +13,3 @@ add_library(lgll
         shader.cpp)
 
 target_link_libraries(lgll PRIVATE glad)
-
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(GLFW3 REQUIRED IMPORTED_TARGET glfw3)
-pkg_check_modules(GLM REQUIRED IMPORTED_TARGET glm)
-pkg_check_modules(SDL2IMAGE REQUIRED IMPORTED_TARGET SDL2_image)
-
-target_link_libraries(lgll PUBLIC
-    PkgConfig::GLFW3
-    PkgConfig::GLM
-    PkgConfig::SDL2IMAGE)
-

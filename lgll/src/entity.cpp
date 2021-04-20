@@ -1,6 +1,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
+#include <string>
 #include <vector>
 
 #include "lgll/geometry.h"
@@ -10,7 +11,7 @@
 
 using std::vector;
 
-Entity::Entity(const char *obj_filename, const char *vertex_shader_filename, const char *fragment_shader_filename) {
+Entity::Entity(std::string obj_filename, std::string vertex_shader_filename, std::string fragment_shader_filename) {
     this->vertex_shader_filename = vertex_shader_filename;
     this->fragment_shader_filename = fragment_shader_filename;
     this->object_to_world = glm::mat4(1.0);
@@ -69,7 +70,7 @@ bool Entity::load_into_program(GLuint program) {
     return true;
 }
 
-void Entity::set_texture(const char *texture_filename) {
+void Entity::set_texture(std::string texture_filename) {
     // Load multiple textures TODO
 
     this->texture_filename = texture_filename;
