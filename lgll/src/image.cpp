@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
+#include <SDL2/SDL.h>
 #include <SDL_image.h>
 
 #include <bitset>
@@ -96,48 +97,18 @@ GLuint load_texture(const char* filename, const char* texture_name) {
         return -1; // TODO
     }
 
-    GLint internal_fmt;
-    GLenum fmt;
-
-    if (res_texture->format->Amask == 0) {
-        std::cout << filename << " does not appear to have an alpha channel" << std::endl;
-        internal_fmt = GL_RGB;
-
-        switch (res_texture->format->BytesPerPixel) {
-            case 1:
-                fmt = GL_RGB8;
-                break;
-            case 2:
-                fmt = GL_RGB16_SNORM;
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            default:
-                break;
-        }
-    } else {
-        internal_fmt = GL_RGBA;
-    }
-
-    std::cout << filename << " bits/pixel: " << static_cast<int>(res_texture->format->BitsPerPixel) << std::endl;
-    std::cout << filename << " R mask: " << std::bitset<32>(res_texture->format->Rmask) << std::endl;
-    std::cout << filename << " G mask: " << std::bitset<32>(res_texture->format->Gmask) << std::endl;
-    std::cout << filename << " B mask: " << std::bitset<32>(res_texture->format->Bmask) << std::endl;
-    std::cout << filename << " A mask: " << std::bitset<32>(res_texture->format->Amask) << std::endl;
-
     glGenTextures(1, &texture_id);
     glBindTexture(GL_TEXTURE_2D, texture_id);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D,
+    glTexImage2D(
+        GL_TEXTURE_2D,
         0,
-        GL_RGBA, // TODO hardcoded
+        GL_RGBA8, // TODO hardcoded
         res_texture->w,
         res_texture->h,
         0,
-        GL_RGBA, // TODO hardcoded
-        GL_UNSIGNED_BYTE,
+        GL_BGRA, // TODO hardcoded
+        GL_UNSIGNED_INT_8_8_8_8_REV,
         res_texture->pixels);
     SDL_FreeSurface(res_texture);
 

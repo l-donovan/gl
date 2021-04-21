@@ -8,6 +8,7 @@
 
 #include <string>
 
+// `_ROOT_DIR` is set via cmake
 std::string ROOT_DIR(_ROOT_DIR);
 
 Entity suzanne(ROOT_DIR + "/engine/models/suzanne.obj", ROOT_DIR + "/engine/shaders/base.v.glsl", ROOT_DIR + "/engine/shaders/base.f.glsl");
@@ -83,7 +84,7 @@ void window_size(int width, int height) {
 
 int main(int argc, char** argv) {
     suzanne.set_texture(ROOT_DIR + "/engine/images/chinese_garden.png");
-    cactus.set_texture(ROOT_DIR + "/engine/images/CubeTexture.png");
+    cactus.set_texture(ROOT_DIR + "/engine/images/succulent.png");
     skybox.set_texture(ROOT_DIR + "/engine/images/chinese_garden.png");
     sphere.set_texture(ROOT_DIR + "/engine/images/chinese_garden.png");
 
