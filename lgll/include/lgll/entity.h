@@ -19,13 +19,13 @@ class Entity {
         GLint uniform_m, uniform_v, uniform_p, uniform_m_3x3_inv_transp, uniform_camera;
         GLint uniform_mat_color, uniform_mat_metallic, uniform_mat_roughness, uniform_mat_reflectance, uniform_mat_clear_coat, uniform_mat_clear_coat_roughness, uniform_mat_texture;
         GLuint vs, fs;
-        const char *vertex_shader_filename, *fragment_shader_filename;
+        std::string vertex_shader_filename, fragment_shader_filename;
         glm::mat4 object_to_world;
         glm::vec3 obj_local_rotation, obj_global_rotation, obj_translation, obj_scale;
         GLuint texture_id;
         struct attributes *material_attributes;
     public:
-        Entity(const char *obj_filename, const char *vertex_shader_filename, const char *fragment_shader_filename);
+        Entity(std::string obj_filename, std::string vertex_shader_filename, std::string fragment_shader_filename);
         std::string obj_filename;
         std::string texture_filename;
         struct mesh_t *mesh;
@@ -42,6 +42,6 @@ class Entity {
         void scale(glm::vec3 scale);
         void attach_shader(GLuint program);
         void detach_shader(GLuint program);
-        void set_texture(const char *texture_filename);
+        void set_texture(std::string texture_filename);
         void set_material_attributes(attributes *material_attributes);
 };

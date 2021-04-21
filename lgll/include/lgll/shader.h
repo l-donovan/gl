@@ -6,9 +6,11 @@
 
 #include <glm/glm.hpp>
 
-char* file_read(const char*);
+#include <string>
+
+char* file_read(std::string);
 void print_log(GLuint);
-GLuint create_shader(const char*, GLenum);
+GLuint create_shader(std::string, GLenum);
 
 struct attributes {
     glm::vec3 color = glm::vec3(0.6, 0.5, 0.7);

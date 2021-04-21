@@ -2,8 +2,10 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
+#include <SDL2/SDL.h>
 #include <SDL_image.h>
 
+#include <bitset>
 #include <cstdio>
 #include <cstring>
 #include <iostream>
@@ -11,6 +13,12 @@
 #include <vector>
 
 #include "lgll/image.h"
+
+// For `ssize_t` support in VS
+#if defined(_MSC_VER)
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t;
+#endif
 
 using std::vector;
 
@@ -92,14 +100,15 @@ GLuint load_texture(const char* filename, const char* texture_name) {
     glGenTextures(1, &texture_id);
     glBindTexture(GL_TEXTURE_2D, texture_id);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D,
+    glTexImage2D(
+        GL_TEXTURE_2D,
         0,
-        GL_RGB, // TODO hardcoded
+        GL_RGBA8, // TODO hardcoded
         res_texture->w,
         res_texture->h,
         0,
-        GL_RGB, // TODO hardcoded
-        GL_UNSIGNED_BYTE,
+        GL_BGRA, // TODO hardcoded
+        GL_UNSIGNED_INT_8_8_8_8_REV,
         res_texture->pixels);
     SDL_FreeSurface(res_texture);
 
